@@ -1,0 +1,185 @@
+
+    
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Css File-->
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<!-- Bootstrap files-->
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<title>Login Here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+</head>
+
+
+<body> 
+
+ <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container ">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            <a class="navbar-brand" href="#">Band Application</a>
+            </div>
+            <div class="navbar-collapse collapse">
+
+                      <ul class="nav navbar-nav">
+                              <li><a href="/createband">Create band</a></li>
+                       </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><a href="#">welcome {{name}}</a></li>
+                        <li><a href="/logout">Logout</a></li>
+
+                    </ul>
+
+            </div>
+
+        </div>
+              
+    </div>
+
+
+<div class="container" style="margin-top: 5%">
+ <h1>Hi, Welcome to your List of Band's {{name}}</h1>
+
+ <div class="entry">
+<table class="table table-striped " id="mytable">
+    <thead>
+    <tr>
+        <th  scope="col">Band Name</th>
+        <th  scope="col">Description</th>
+         <th  scope="col"></th>
+         <th  scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+      {{#if bandList}}
+        {{#each bandList}}
+
+      <tr>
+        <td>{{name}}</td>
+        <td>{{description}}</td>
+        <td><a href="javascript:void(0);" class="btn btn-sm btn-info edit"
+         data-id="{{ id }}" data-name="{{ name}}" 
+         data-description="{{ description}}">Edit</a></td>
+        <td><a href="javascript:void(0);" class="btn btn-sm btn-danger delete"
+         data-id="{{ id }}">Delete</a></td>
+      </tr>
+     {{/each}}
+     {{else}}
+     <td>
+        <h2>No Bands to show please create one on clicking create band tab</h2>
+     </td>
+     {{/if}}
+
+  </tbody>
+</table>
+<hr>
+</div>
+
+</div>
+    
+
+         <!-- Modal Update Product-->
+   <form action="/update" method="post">
+       <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Band</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                  <input type="text" name="name" class="form-control name" placeholder="Bandname"
+                   required>
+              </div>
+ 
+              <div class="form-group">
+  
+                  <textarea type="text" class="form-control description" placeholder="Description"
+                  name="description" rows="3" required></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="id" class="id">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+       </div>
+  </form>
+ 
+
+     <!-- Modal Delete Product-->
+      <form id="add-row-form" action="/delete" method="post">
+         <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                                        <h5 class="modal-title" id="myModalLabel">Delete Band</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   </div>
+                   <div class="modal-body">
+                                                 <strong>Are you sure to delete this data?</strong>
+                   </div>
+                   <div class="modal-footer">
+                        <input type="hidden" name="id" class="form-control id" required>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Delete</button>
+                   </div>
+                    </div>
+            </div>
+         </div>
+     </form>
+
+<script>
+     $(document).ready(function(){
+       $('#mytable').on('click','.edit',function(){
+        var band_id = $(this).data('id');
+        var band_name = $(this).data('name');
+        var band_description = $(this).data('description');
+        $('#EditModal').modal('show');
+        $('.name').val(band_name);
+        $('.description').val(band_description);
+        $('.id').val(band_id);
+      });
+            //showing delete record modal
+       $('#mytable').on('click','.delete',function(){
+          var band_id = $(this).data('id');
+          $('#DeleteModal').modal('show');
+          $('.id').val(band_id);
+       });
+
+    });
+          
+</script>
+</body>
+
+
+<!-- step 5 -->
+
+
+</html> 

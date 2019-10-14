@@ -1,0 +1,26 @@
+body {
+    z-index: 4;
+    background:#cf6a87;
+    /* fallback for old browsers */
+    
+    background: -webkit-linear-gradient(to right, #40407a, #cf6a87);
+    /* Chrome 10-25, Safari 5.1-6 */
+    
+    background: linear-gradient(to right,  #40407a , #cf6a87);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    .hello{
+        color: aqua;
+    }
+    .container{
+        height: 30%;
+        padding: 10px;
+        margin: 0 auto;
+        margin-top: 40px;
+        /* background: hsl(300, 12%, 97%);   */
+        border-radius: 35px;
+        opacity: 0.7;  
+        z-index: 1;
+        background-color: #bdd385;
+    }
+    

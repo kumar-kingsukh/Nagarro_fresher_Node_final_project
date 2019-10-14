@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Css File-->
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<!-- Bootstrap files-->
+<title>Login Here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+<style>
+
+    .container{
+        height: 30%;
+        padding: 10px;
+        margin: 0 auto;
+        margin-top: 80px;
+        background: hsl(300, 12%, 97%);
+        border-radius: 35px;
+        /* opacity: 0.7;  
+        z-index: 1; */
+    }
+    .btn-primary{
+        background: black; 
+    }
+
+
+</style>
+
+</head>
+
+
+<body>
+
+  
+   <div class="container mt-5" style="width: 300px; height: 315px"> 
+
+    <div class="col-xs-9 col-md-12 col-lg-12" align="center" >
+      <h1>LOGIN </h1>
+       {{#if error}}
+       <strong style="color:red">{{error}}</strong> 
+       {{/if}}
+      <form action="/login" method="post">
+      <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username"/>
+            <label>Password</label>
+            <input type="password" class="form-control" name="password"/> <br>   
+            <div align="left">
+                New User:<a href="/signup">Sign Up</a>
+             </div><br>  
+            <input class="btn btn-primary" type="submit" value="Login"/>
+      </div>
+      </form>
+</body>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+  <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+</html> 
